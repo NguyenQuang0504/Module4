@@ -12,13 +12,14 @@
 </head>
 <body>
 <h1>Calculator</h1>
-<form action="/add" method="get">
+<form action="/calculator" method="get">
     <input type="text" placeholder="Number1" name="num1">
     <input type="text" placeholder="Number2" name="num2">
-    <button type="submit">add</button>
-    <a href="/sub">SUB(-)</a>
-    <a href="/multi">MULTI(x)</a>
-    <a href="/division">DIVISION(/)</a>
+    <input type="submit" value="add" name="calculator" placeholder="ADD">
+    <input type="submit" value="sub" name="calculator" placeholder="SUB">
+    <input type="submit" value="multi" name="calculator" placeholder="Multi">
+    <input type="submit" value="division" name="calculator" placeholder="DIVISION">
 </form>
+<h1 style="color: red">Result: ${result}</h1>
 </body>
 </html>
