@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Title</title>
@@ -18,23 +19,27 @@
 <body>
 <h1>Sandwich Condiment</h1>
 <form action="/save" method="post">
-        <input class="form-check-input" type="checkbox" value="Lettuce" name="lettuce">
+        <input class="form-check-input" type="checkbox" value="Lettuce" name="choose">
         <label>
             Lettuce
         </label>
-        <input class="form-check-input" type="checkbox" value="Tomato" name="tomato">
+        <input class="form-check-input" type="checkbox" value="Tomato" name="choose">
         <label>
             Tomato
         </label>
-        <input class="form-check-input" type="checkbox" value="Mustard" name="mustard">
+        <input class="form-check-input" type="checkbox" value="Mustard" name="choose">
         <label>
             Mustard
         </label>
-        <input class="form-check-input" type="checkbox" value="Sprouts" name="sprouts">
+        <input class="form-check-input" type="checkbox" value="Sprouts" name="choose">
         <label>
             Sprouts
         </label>
     <button type="submit">Save</button>
 </form>
+<c:forEach var="eat" items="${choose}">
+    <h1> EAT: <c:out value="${eat}"></c:out> </h1>
+</c:forEach>
+<h1></h1>
 </body>
 </html>

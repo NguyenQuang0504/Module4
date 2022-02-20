@@ -13,11 +13,8 @@ public class HomeController {
         return "home";
     }
     @PostMapping("/save")
-    public String save(@RequestParam String lettuce, @RequestParam String tomato, @RequestParam String mustard, @RequestParam String sprouts, Model model){
-        model.addAttribute("lettuce", lettuce);
-        model.addAttribute("tomato", tomato);
-        model.addAttribute("mustard", mustard);
-        model.addAttribute("sprouts", sprouts);
-        return "display";
+    public String save(@RequestParam String choose, Model model){
+        model.addAttribute("choose", choose);
+        return "home";
     }
 }
