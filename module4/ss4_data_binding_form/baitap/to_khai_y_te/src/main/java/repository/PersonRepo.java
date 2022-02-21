@@ -13,4 +13,9 @@ public class PersonRepo implements IPersonRepo {
    public void save(Person person) {
       list.add(person);
    }
+
+   @Override
+   public List<Person> display() {
+      return list;
+   }
 }
