@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>List Product</h1>
+<form th:action="@{/start/find}" method="get">
+    <lable>Find By Id</lable>
+    <input type="text" name="name1" placeholder="Name">
+    <button type="submit">Search</button>
+</form>
+<a th:href="@{/start/create}">Add New Product</a>
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Cost</th>
+        <th>Producer</th>
+    </tr>
+    <tr th:each="product1: ${product}">
+        <td th:text="${product1.getId()}"></td>
+        <td th:text="${product1.getName()}"></td>
+        <td th:text="${product1.getCost()}"></td>
+        <td th:text="${product1.getProducer()}"></td>
+        <td>
+            <a th:href="@{/start/{id}/edit(id=${product1.getId()})}">Edit</a>
+        </td>
+            <td>
+                <a th:href="@{/start/{id}/delete(id=${product1.getId()})}">Delete</a>
+            </td>
+    </tr>
+</table>
+</body>
+</html>
