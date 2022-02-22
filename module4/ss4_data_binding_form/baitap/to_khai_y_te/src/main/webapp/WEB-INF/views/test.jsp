@@ -32,6 +32,8 @@
         <th>Address</th>
         <th>Phone</th>
         <th>Email</th>
+        <th>Infection</th>
+        <th>Symptom</th>
     </tr>
     <c:forEach var="person" items="${model}">
         <tr>
@@ -43,8 +45,22 @@
             <td><c:out value="${person.address}"></c:out></td>
             <td><c:out value="${person.phone}"></c:out></td>
             <td><c:out value="${person.email}"></c:out></td>
+            <td>
+                <c:out value="${person.infection.infection1}"></c:out> / <c:out value="${person.infection.infection2}"></c:out>
+            </td>
+            <td>
+                <c:out value="${person.symptom.symptom1}"></c:out>
+                <c:out value="${person.symptom.symptom2}"></c:out>
+                <c:out value="${person.symptom.symptom3}"></c:out>
+                <c:out value="${person.symptom.symptom4}"></c:out>
+                <c:out value="${person.symptom.symptom5}"></c:out>
+                <c:out value="${person.symptom.symptom6}"></c:out>
+                <c:out value="${person.symptom.symptom7}"></c:out>
+                <c:out value="${person.symptom.symptom8}"></c:out>
+            </td>
         </tr>
     </c:forEach>
 </table>
+<a href="/home">Ke khai</a>
 </body>
 </html>

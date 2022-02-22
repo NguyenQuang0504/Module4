@@ -11,6 +11,9 @@
 <head>
     <title>Title</title>
     <style>
+        .radio-select{
+            width: 60px;
+        }
         table{
             border: 1px solid black;
             border-collapse: collapse;
@@ -102,6 +105,82 @@
     <br>
     <form:input cssStyle="width: 100%; height: 40px" path="email"/>
     <br>
+    <span>Trong vong 14 ngay qua Anh/Chi co xuat hien dau hieu nao sau day khong?</span>
+    <br>
+    <table style="width: 100%">
+        <tr>
+            <th>Trieu chung</th>
+            <th>Co</th>
+            <th>Khong</th>
+            <th>Trieu chung</th>
+            <th>Co</th>
+            <th>Khong</th>
+        </tr>
+        <tr>
+            <td>Sot(*)</td>
+            <td class="radio-select">
+                <form:radiobutton path="symptom.symptom1" value="Sot"/> Yes
+            </td>
+            <td class="radio-select">
+                <form:radiobutton path="symptom.symptom1" value=""/> No
+            </td>
+            <td>Non/Buon non(*)</td>
+            <td class="radio-select">
+                <form:radiobutton path="symptom.symptom2" value="Non/Buon non"/> Yes
+            </td>
+            <td class="radio-select">
+                <form:radiobutton path="symptom.symptom2" value=""/> No
+            </td>
+        </tr>
+        <tr>
+            <td>Ho(*)</td>
+            <td class="radio-select">
+                <form:radiobutton path="symptom.symptom3" value="Ho"/> Yes
+            </td>
+            <td class="radio-select">
+                <form:radiobutton path="symptom.symptom3" value=""/> No
+            </td>
+            <td>Tieu chay(*)</td>
+            <td class="radio-select">
+                <form:radiobutton path="symptom.symptom4" value="Tieu chay"/> Yes
+            </td>
+            <td class="radio-select">
+                <form:radiobutton path="symptom.symptom4" value=""/> No
+            </td>
+        </tr>
+        <tr>
+            <td>Kho tho(*)</td>
+            <td class="radio-select">
+                <form:radiobutton path="symptom.symptom5" value="Kho tho"/> Yes
+            </td>
+            <td class="radio-select">
+                <form:radiobutton path="symptom.symptom5" value=""/> No
+            </td>
+            <td>Sot huyet ngoai da(*)</td>
+            <td class="radio-select">
+                <form:radiobutton path="symptom.symptom6" value="Sot huyet ngoai da"/> Yes
+            </td>
+            <td class="radio-select">
+                <form:radiobutton path="symptom.symptom6" value=""/> No
+            </td>
+        </tr>
+        <tr>
+            <td>Dau hong(*)</td>
+            <td class="radio-select">
+                <form:radiobutton path="symptom.symptom7" value="Dau hong"/> Yes
+            </td>
+            <td class="radio-select">
+                <form:radiobutton path="symptom.symptom7" value=""/> No
+            </td>
+            <td>Phat ban ngoai da(*)</td>
+            <td class="radio-select">
+                <form:radiobutton path="symptom.symptom8" value="Phat ban ngoai da"/> Yes
+            </td>
+            <td class="radio-select">
+                <form:radiobutton path="symptom.symptom8" value=""/> No
+            </td>
+        </tr>
+    </table>
     <span>Lich su phoi nhiem: Trong vong 14 ngay qua, Anh/Chi co:</span>
     <br>
     <table>

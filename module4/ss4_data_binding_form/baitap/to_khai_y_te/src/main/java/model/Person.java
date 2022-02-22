@@ -19,10 +19,10 @@ public class Person {
     private String address;
     private  String phone;
     private String email;
-    private String[] symptom;
+    private Symptom symptom;
     private Infection infection;
 
-    public Person(String name, String date, String gender, String country, String cccd, String go, String seriVehicle, String numChair, String dateStart, String dateEnd, String note, String city, String district, String commune, String address, String phone, String email, String[] symptom, Infection infection) {
+    public Person(String name, String date, String gender, String country, String cccd, String go, String seriVehicle, String numChair, String dateStart, String dateEnd, String note, String city, String district, String commune, String address, String phone, String email, Symptom symptom, Infection infection) {
         this.name = name;
         this.date = date;
         this.gender = gender;
@@ -44,11 +44,11 @@ public class Person {
         this.infection = infection;
     }
 
-    public String[] getSymptom() {
+    public Symptom getSymptom() {
         return symptom;
     }
 
-    public void setSymptom(String[] symptom) {
+    public void setSymptom(Symptom symptom) {
         this.symptom = symptom;
     }
 
