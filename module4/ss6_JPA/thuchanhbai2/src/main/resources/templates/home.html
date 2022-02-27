@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head" >
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>List Customer</h1>
+<table class="table table-striped">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>CMND</th>
+        <th>Address</th>
+        <th>Update</th>
+        <th>Delete</th>
+    </tr>
+    <tr th:each="customer,inter :${customers}">
+        <td th:text="${customer.getId()}"> </td>
+        <td th:text="${customer.getName()}"></td>
+        <td th:text="${customer.getCmnd()}"></td>
+        <td th:text="${customer.getAddress()}"></td>
+        <td><a th:href="@{/update/{id}(id=${customer.getId()})}">Update</a></td>
+        <td><a th:href="@{/delete{id}(id=${customer.getId()})}">Delete</a></td>
+    </tr>
+</table>
+<br>
+<a th:href="@{/create}">Add new Customer with Store Proceduce</a>
+</body>
+</html>
