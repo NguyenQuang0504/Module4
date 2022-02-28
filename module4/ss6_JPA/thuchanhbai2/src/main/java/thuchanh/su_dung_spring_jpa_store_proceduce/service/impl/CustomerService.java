@@ -20,6 +20,9 @@ public class CustomerService implements ICustomerService {
 
     @Override
     public void saveByStoreProceduce(Customer customer) {
-        iCustomerRepository.save(customer);
+        String name = customer.getName();
+        String cmnd = customer.getCmnd();
+        String address = customer.getAddress();
+        iCustomerRepository.saveByStoreProceduce(address, cmnd, name);
     }
 }

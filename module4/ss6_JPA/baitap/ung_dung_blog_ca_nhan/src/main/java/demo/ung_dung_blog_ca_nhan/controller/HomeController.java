@@ -47,5 +47,4 @@ public class HomeController {
         modelMap.addAttribute("blog", blog);
         return "update";
     }
-
 }
