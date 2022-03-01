@@ -10,7 +10,13 @@
 </head>
 <body>
 <h1>Display List Customer</h1>
-<a th:href="@{/provinces/create}">Create Provinces!!!</a>
+<form th:action="@{/customer/search}" method="post">
+    <div>
+        <lable>Search</lable>
+        <input type="text" name="name">
+    </div>
+    <button type="submit">Search</button>
+</form>
 <table class="table table-dark table-striped">
     <tr>
         <th>Id</th>
@@ -25,6 +31,11 @@
         <td th:text="${customer.provinces.getNameProvinces()}"></td>
     </tr>
 </table>
-<a th:href="@{/customer/create}">Add new Customer!!!</a>
+<div>
+    <a th:href="@{'/customer/search'(page=${list.number - 1})}" th:if="${list.hasPrevious()}">Back</a>
+    <span th:text="${list.number + 1}"></span>/<span th:text="${list.totalPages}"></span>
+    <a th:href="@{'/customer/search'(page=${list.number + 1})}" th:if="${list.hasNext()}">Next</a>
+</div>
+<a th:href="@{/customer/home}">Back to List Customer</a>
 </body>
 </html>

@@ -1,0 +1,5 @@
+<div>
+    <a th:href="@{'dung dan den trang hien thi'(page=${list.number - 1})}" th:if="${list.hasPrevious()}">Back</a>
+    <span th:text="${list.number + 1}"></span>/<span th:text="${list.totalPages}"></span>
+    <a th:href="@{'dung dan den trang hien th'(page=${list.number + 1})}" th:if="${list.hasNext()}">Next</a>
+</div>

@@ -6,12 +6,12 @@ import demo.ung_dung_quan_ly_khach_hang.repository.IProvincesRepository;
 import demo.ung_dung_quan_ly_khach_hang.service.ICustomerService;
 import demo.ung_dung_quan_ly_khach_hang.service.IProvincesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @RequestMapping("/customer")
@@ -23,8 +23,8 @@ public class HomeController {
     @Autowired
     private IProvincesService iProvincesService;
     @GetMapping("/home")
-    public String home(ModelMap modelMap){
-        List<Customer> customerList = iCustomerService.findAll();
+    public String home(@PageableDefault(size = 3) Pageable pageable, ModelMap modelMap){
+        Page<Customer> customerList = iCustomerService.findAll(pageable);
         modelMap.addAttribute("list", customerList);
         return "home";
     }
@@ -40,5 +40,12 @@ public class HomeController {
     public String save(@ModelAttribute Customer customer){
         iCustomerService.save(customer);
         return "redirect:/customer/home";
+    }
+
+    @GetMapping("/search")
+    public String Search(@PageableDefault(size = 3) Pageable pageable, ModelMap modelMap,@RequestParam String name){
+        Page<Customer> list = iCustomerService.search(name, pageable);
+        modelMap.addAttribute("list", list);
+        return "display";
     }
 }
