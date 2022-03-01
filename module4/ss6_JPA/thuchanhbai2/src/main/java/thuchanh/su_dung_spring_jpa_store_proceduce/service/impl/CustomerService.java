@@ -25,4 +25,24 @@ public class CustomerService implements ICustomerService {
         String address = customer.getAddress();
         iCustomerRepository.saveByStoreProceduce(address, cmnd, name);
     }
+
+    @Override
+    public Customer findById(Integer id) {
+        return iCustomerRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void save(Customer customer) {
+        iCustomerRepository.save(customer);
+    }
+
+    @Override
+    public void delete(Integer id) {
+        iCustomerRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Customer> findName(String search) {
+        return iCustomerRepository.findName(search);
+    }
 }

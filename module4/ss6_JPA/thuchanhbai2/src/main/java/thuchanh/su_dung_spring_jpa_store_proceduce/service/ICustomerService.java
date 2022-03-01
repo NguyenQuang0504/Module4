@@ -8,4 +8,12 @@ public interface ICustomerService {
     List<Customer> findAll();
 
     void saveByStoreProceduce(Customer customer);
+
+    Customer findById(Integer id);
+
+    void save(Customer customer);
+
+    void delete(Integer id);
+
+    List<Customer> findName(String search);
 }

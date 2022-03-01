@@ -9,6 +9,7 @@ public class Blog {
     private Integer id;
     private String date;
     private String address;
+    @Column(columnDefinition = "text")
     private String content;
     private String topic;
 

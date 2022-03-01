@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table class="table table-striped">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>CMND</th>
+        <th>Address</th>
+    </tr>
+    <tr th:each="customer,inter :${list}">
+        <td th:text="${customer.getId()}"> </td>
+        <td th:text="${customer.getName()}"></td>
+        <td th:text="${customer.getCmnd()}"></td>
+        <td th:text="${customer.getAddress()}"></td>
+    </tr>
+</table>
+<a th:href="@{/home}">Return Home</a>
+</body>
+</html>
