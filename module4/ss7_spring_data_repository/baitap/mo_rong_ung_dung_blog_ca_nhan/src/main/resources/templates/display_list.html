@@ -23,8 +23,11 @@
         <td><a th:href="@{/blog/update/{id}(id=${blog.getId()})}">Update</a></td>
         <td><a th:href="@{/blog/delete/{id}(id=${blog.getId()})}">Delete</a></td>
     </tr>
+    <h3><a th:href="@{/category/home}">Return List Category</a></h3>
 </table>
-<h3><a th:href="@{/category/home}">Display List Category</a></h3>
-<h3><a th:href="@{/blog/create}">Create New Blog!!!</a></h3>
+<div>
+    <a th:href="@{'/category/view/{id}'(page=${list.number -1}, id=${id})}" th:if="${list.hasPrevious()}">Back</a>
+    <span th:text="${list.number + 1}"></span>/<span th:text="${list.totalPages}"></span>
+    <a th:href="@{'/category/view/{id}'(page=${list.number + 1}, id=${id})}" th:if="${list.hasNext()}">Next</a>
+</div>
 </body>
-</html>

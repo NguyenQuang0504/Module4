@@ -13,6 +13,18 @@ public class Blog {
     private String content;
     private String topic;
 
+    @ManyToOne
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category category;
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
     public Blog() {
     }
 

@@ -8,7 +8,7 @@
 <center>
     <h1> Update Blog</h1>
 </center>
-<form th:action="@{/create}" method="post" th:object="${blog}">
+<form th:action="@{/blog/create}" method="post" th:object="${blog}">
     <div class="container">
         <input type="hidden" th:field="*{id}">
         <center>
@@ -22,6 +22,12 @@
             <input th:field="*{address}" type="text" class="form-control" placeholder="Address" aria-label="Username">
             <span class="input-group-text">Date</span>
             <input th:field="*{date}" type="date" class="form-control" aria-label="Server">
+        </div>
+            <div>
+                <lable>Category</lable>
+                <select th:field="*{category}">
+                    <option th:each="category :${list}" th:text="${category.getName()}" th:value="${category.id}"></option>
+                </select>
         </div>
         <div class="mb-3">
             <label for="exampleFormControlTextarea1" class="form-label">Content</label>
