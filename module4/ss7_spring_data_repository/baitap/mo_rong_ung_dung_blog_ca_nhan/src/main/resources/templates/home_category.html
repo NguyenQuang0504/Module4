@@ -7,10 +7,10 @@
 <body>
 <h1>List Category</h1>
 <h3><a th:href="@{/blog/home}">Display All Blog</a></h3>
-<form th:action="@{/category/search}" method="get" >
+<form th:action="@{/category/search}">
     <div>
         <lable>Search</lable>
-        <input type="text" name="name">
+        <input type="text" th:name="name">
     </div>
     <button type="submit">Search</button>
 </form>
