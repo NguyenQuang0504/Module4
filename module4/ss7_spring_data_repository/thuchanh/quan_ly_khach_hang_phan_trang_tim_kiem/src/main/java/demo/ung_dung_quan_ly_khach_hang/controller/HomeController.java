@@ -46,6 +46,7 @@ public class HomeController {
     public String Search(@PageableDefault(size = 3) Pageable pageable, ModelMap modelMap,@RequestParam String name){
         Page<Customer> list = iCustomerService.search(name, pageable);
         modelMap.addAttribute("list", list);
+        modelMap.addAttribute("name", name);
         return "display";
     }
 }

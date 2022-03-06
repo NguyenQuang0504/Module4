@@ -32,9 +32,9 @@
     </tr>
 </table>
 <div>
-    <a th:href="@{'/customer/search'(page=${list.number - 1})}" th:if="${list.hasPrevious()}">Back</a>
+    <a th:href="@{'/customer/search'(page=${list.number - 1}, name=${name})}" th:if="${list.hasPrevious()}">Back</a>
     <span th:text="${list.number + 1}"></span>/<span th:text="${list.totalPages}"></span>
-    <a th:href="@{'/customer/search'(page=${list.number + 1})}" th:if="${list.hasNext()}">Next</a>
+    <a th:href="@{'/customer/search'(page=${list.number + 1}, name = ${name})}" th:if="${list.hasNext()}">Next</a>
 </div>
 <a th:href="@{/customer/home}">Back to List Customer</a>
 </body>

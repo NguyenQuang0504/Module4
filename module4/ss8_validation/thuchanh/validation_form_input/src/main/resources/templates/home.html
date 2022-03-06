@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{/save}" method="post" th:object="${users}">
+    <div>
+        <lable>
+            Name
+        </lable>
+        <input type="text" th:field="*{user}">
+        <p th:if="${#fields.hasErrors('user')}" th:errors="*{user}">User Errors</p>
+    </div>
+    <div>
+        <lable>Age</lable>
+        <input type="text" th:field="*{age}">
+        <p th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age Errors</p>
+    </div>
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>
