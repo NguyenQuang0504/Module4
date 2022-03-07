@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{/save}" method="post" th:object="${user1}">
+    <div>
+        <lable>User</lable>
+        <input type="text" th:field="*{user}">
+        <p th:if="${#fields.hasErrors('user')}" th:errors="*{user}">User Errors</p>
+    </div>
+    <div>
+        <lable>Password</lable>
+        <input type="text" th:field="*{password}">
+        <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Errors</p>
+    </div>
+    <div>
+        <lable>Phone</lable>
+        <input type="text" th:field="*{phone}">
+        <p th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">Phone Errors</p>
+    </div>
+    <div>
+        <lable>
+            email
+        </lable>
+        <input type="text" th:field="*{email}">
+        <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Errors</p>
+    </div>
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>
