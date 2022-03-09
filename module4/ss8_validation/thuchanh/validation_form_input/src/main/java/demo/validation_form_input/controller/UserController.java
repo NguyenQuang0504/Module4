@@ -25,7 +25,7 @@ public class UserController {
     }
 
     @PostMapping("/save")
-    public String save(@Validated @ModelAttribute("users") User user, BindingResult bindingResult, ModelMap modelMap){
+    public String save(@Validated @ModelAttribute(name = "users") User user, BindingResult bindingResult, ModelMap modelMap){
         if (bindingResult.hasFieldErrors()){
             return "home";
         }

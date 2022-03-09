@@ -15,7 +15,6 @@ public class PhoneNumber implements Validator {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String phoneNumber;
-
     public PhoneNumber() {
     }
 
@@ -44,7 +43,7 @@ public class PhoneNumber implements Validator {
     public void validate(Object target, Errors errors) {
         PhoneNumber phoneNumber = (PhoneNumber)target;
         String number = phoneNumber.getPhoneNumber();
-        ValidationUtils.rejectIfEmpty(errors, "phoneNumber", "number.Empty");
+//        ValidationUtils.rejectIfEmpty(errors, "phoneNumber", "number.Empty");
         if (number.length()>11 || number.length()<10){
             errors.rejectValue("phoneNumber", "number.length");
         }
