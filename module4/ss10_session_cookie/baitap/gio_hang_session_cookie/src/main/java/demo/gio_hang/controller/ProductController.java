@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @Controller
@@ -68,5 +67,10 @@ public class ProductController {
     public String delete(@PathVariable Integer id, @ModelAttribute Cart cart){
         cart.deleteById(id);
         return "redirect:/shopping-cart";
+    }
+    @GetMapping("/pay")
+    public String pay(@ModelAttribute Cart cart){
+        cart.pay();
+        return "redirect:/display";
     }
 }
