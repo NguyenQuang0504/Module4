@@ -72,4 +72,20 @@ public class Cart  {
         }
         return totalCost;
     }
+    public void downItem(Product product){
+        if (checkItemInCart(product)){
+            Map.Entry<Product, Integer> entry = selectItemInCart(product);
+            if (entry.getValue()>1) {
+                Integer count = entry.getValue() - 1;
+                products.replace(entry.getKey(), count);
+            }
+        }
+    }
+    public void deleteById(Integer id){
+        for (Map.Entry<Product, Integer> entry : products.entrySet()){
+            if (entry.getKey().getId().equals(id)){
+                products.remove(entry.getKey());
+            }
+        }
+    }
 }

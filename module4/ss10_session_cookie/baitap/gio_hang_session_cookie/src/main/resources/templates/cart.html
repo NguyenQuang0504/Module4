@@ -6,27 +6,31 @@
 </head>
 <body>
 <p>
-    <a href="/home">Shop</a>
+    <a href="/display">Choose Product</a>
 </p>
 <h1>Your Cart</h1>
-<form th:action="@{/home}" th:object="${cart}" method="post">
-    <h3>Total Items: <span th:text="${cart.countItemInCart()}"></span></h3>
-    <h3>Total Products: <span th:text="${cart.countProductInCart()}"></span></h3>
+<form th:action="@{/update}" th:object="${cart}" method="get">
+    <p>Total Items: <span th:text="${cart.countItemInCart()}"></span></p>
+    <p>Total Products: <span th:text="${cart.countProductInCart()}"></span></p>
     <table border="1">
         <tr>
             <th>Item</th>
             <th>Quantity</th>
             <th>Price</th>
+            <th>Delete</th>
+            <th>Amount</th>
         </tr>
         <tr th:each="product: ${cart.products}">
             <td th:text="${product.getKey().name}"></td>
             <td>
-                <a id="decrease_button" th:text="${'-'}"></a>
                 <span th:text="${product.getValue()}"></span>
-                <a id="increase_button" th:href="@{/add/__${product.getKey().id}__(action='show')}"
-                   th:text="${'+'}"></a>
             </td>
             <td th:text="${product.getKey().cost}"></td>
+            <td><a th:href="@{/delete/{id}(id=${product.getKey().getId()})}">Delete</a></td>
+            <td>
+                <a th:href="@{/add/__${product.getKey().getId()}__(action='show')}">Up</a>
+                <a th:href="@{/add/__${product.getKey().getId()}__(action='down')}">Down</a>
+            </td>
         </tr>
         <tr>
             <td>Total</td>

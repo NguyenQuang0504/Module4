@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Controller
@@ -23,11 +24,12 @@ public class ProductController {
     public Cart setUpCart(){
         return new Cart();
     }
+
     @GetMapping("/display")
     public String display(ModelMap modelMap){
         List<Product> list = iProductService.findAll();
         modelMap.addAttribute("list", list);
-        return "home";
+        return "display";
     }
     @GetMapping("/create")
     public String create( ModelMap modelMap){
@@ -49,6 +51,10 @@ public class ProductController {
             cart.addItemInCart(productOptional.get());
             return "redirect:/shopping-cart";
         }
+        if (action.equals("down")){
+            cart.downItem(productOptional.get());
+            return "redirect:/shopping-cart";
+        }
         cart.addItemInCart(productOptional.get());
         return "redirect:/display";
     }
@@ -57,5 +63,10 @@ public class ProductController {
         ModelAndView modelAndView = new ModelAndView("cart");
         modelAndView.addObject("cart",cart);
         return modelAndView;
+    }
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable Integer id, @ModelAttribute Cart cart){
+        cart.deleteById(id);
+        return "redirect:/shopping-cart";
     }
 }

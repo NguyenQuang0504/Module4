@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/style/style.css">
+</head>
+<body>
+<div>
+    <div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li><a href=""><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-microsoft" viewBox="0 0 16 16">
+                        <path d="M7.462 0H0v7.19h7.462V0zM16 0H8.538v7.19H16V0zM7.462 8.211H0V16h7.462V8.211zm8.538 0H8.538V16H16V8.211z"/>
+                    </svg> Microsoft</a></li>
+                    <li><a href="">Surface</a></li>
+                    <li><a href="">Computers</a></li>
+                    <li><a href="">Computers for Business</a></li>
+                    <li><a href="">AccesORIES</a></li>
+                    <li><a href="">Shop now</a></li>
+                    <li><a th:href="@{/shopping-cart}">Cart</a></li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                    </svg></button>
+                </form>
+            </div>
+        </nav>
+    </div>
+    <div id="banner1">
+        <a class="note" href="">Save big on Surface this holiday season. Shop Deals ></a>
+        <br>
+        <br>
+        <h2>Unwrap possibility with Surface and Windows 11</h2>
+        <h4>Surface laptops and 2-in-1s with Windows 11 are designed to fuel your originality, ideas and passions.*</h4>
+        <br>
+        <br>
+        <a href="">Explore all products</a>
+        <a href="">Shop Surface Pro 8</a>
+    </div>
+    <div id="content">
+    </div>
+    <div class="row container-fluid">
+        <div class="col-12 col-md-6">
+            <h3 style="font-weight: 300;">More choices than ever
+                Check out the most diverse selection of Surface devices yet, built for all the ways you create, work, play, and connect.</h3>
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="card" style="width: 100%;">
+                <div class="card-header">
+                    Featured
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Cras justo odio</li>
+                    <li class="list-group-item">Dapibus ac facilisis in</li>
+                    <li class="list-group-item">Vestibulum at eros</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container" style="margin-top: 30px">
+        <div style="padding: 10px 0px" class="row">
+            <div class="card col-12 col-md-3 col-sm-6" th:each="product :${list}">
+                <img  th:src="${product.getLinkImg()}" alt="Card image cap">
+                <h5 class="card-title" th:text="${product.getName()}"></h5>
+                <div class="card-body">
+                    <p class="card-text">
+                        <p th:text="${product.getDetail()}"></p>
+                    </p>
+                </div>
+                <a th:href="@{/add/__${product.id}__(action='list')}" class="btn btn-primary">Add to Cart</a>
+            </div>
+        </div>
+        <br>
+        <br>
+    </div>
+    <div id="footer">
+
+    </div>
+</div>
+</body>
+</html>
