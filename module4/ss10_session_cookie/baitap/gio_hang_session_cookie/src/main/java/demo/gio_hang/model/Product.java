@@ -1,4 +1,4 @@
-package demo.cart.model;
+package demo.gio_hang.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,7 +12,9 @@ public class Product {
     private Integer id;
     private String name;
     private Double cost;
-    private String description;
+    private String detail;
+    private String linkImg;
+
     public Product() {
     }
 
@@ -40,11 +42,19 @@ public class Product {
         this.cost = cost;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDetail() {
+        return detail;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDetail(String detail) {
+        this.detail = detail;
+    }
+
+    public String getLinkImg() {
+        return linkImg;
+    }
+
+    public void setLinkImg(String linkImg) {
+        this.linkImg = linkImg;
     }
 }

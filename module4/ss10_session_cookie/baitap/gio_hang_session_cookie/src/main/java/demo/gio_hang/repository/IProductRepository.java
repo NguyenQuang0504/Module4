@@ -1,6 +1,6 @@
-package demo.cart.repository;
+package demo.gio_hang.repository;
 
-import demo.cart.model.Product;
+import demo.gio_hang.model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

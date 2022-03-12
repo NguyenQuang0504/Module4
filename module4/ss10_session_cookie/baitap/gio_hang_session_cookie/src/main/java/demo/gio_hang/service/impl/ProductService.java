@@ -1,8 +1,8 @@
-package demo.cart.service.impl;
+package demo.gio_hang.service.impl;
 
-import demo.cart.model.Product;
-import demo.cart.repository.IProductRepository;
-import demo.cart.service.IProductService;
+import demo.gio_hang.model.Product;
+import demo.gio_hang.repository.IProductRepository;
+import demo.gio_hang.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +17,11 @@ public class ProductService implements IProductService {
     @Override
     public List<Product> findAll() {
         return iProductRepository.findAll();
+    }
+
+    @Override
+    public void save(Product product) {
+        iProductRepository.save(product);
     }
 
     @Override
