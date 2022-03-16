@@ -64,9 +64,10 @@ public class HomeController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-//    @GetMapping("/display/content/{id}")
-//    public ResponseEntity<Blog> displayContent(@PathVariable Integer id){
-//        Blog blog = iBlogService.findContent(id);
-//        return new ResponseEntity<>(blog, HttpStatus.OK);
-//    }
+    //Phuong thuc lay cac blog co
+    @GetMapping("/display/blogInCategory/{id}")
+    public ResponseEntity<List<Blog>> displayContent(@PathVariable Integer id){
+        List<Blog> blog = iBlogService.findContent(id);
+        return new ResponseEntity<>(blog, HttpStatus.OK);
+    }
 }

@@ -9,5 +9,7 @@ public interface IBlogService {
 
     Blog findById(Integer id);
 
+    List<Blog> findContent(Integer id);
+
 //    Blog findContent(Integer id);
 }

@@ -23,6 +23,11 @@ public class BlogService implements IBlogService {
         return iBlogRepository.findById(id).orElse(null);
     }
 
+    @Override
+    public List<Blog> findContent(Integer id) {
+        return iBlogRepository.findBlogByIdCategory(id);
+    }
+
 //    @Override
 //    public Blog findContent(Integer id) {
 //        return iBlogRepository.findContent(id);
