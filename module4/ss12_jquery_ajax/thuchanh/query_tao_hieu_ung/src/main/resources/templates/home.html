@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#hide").click(function () {
+                $("#line1").hide();
+                $("#line2").show();
+            });
+            $("#show").click(function () {
+                $("#line1").show();
+                $("#line2").hide();
+            });
+            $("#hideAll").click(function () {
+                $("#line3").hide();
+                $("#line1").hide();
+                $("#line2").hide();
+            })
+        })
+    </script>
+</head>
+<body>
+<h1 id="line1">Test line 1</h1>
+<h1 id="line2">Test line 2</h1>
+<h1 id="line3">Test line 3</h1>
+<button id="hide"> Hide</button>
+<button id="show">Show</button>
+<button id="hideAll">Hide All</button>
+</body>
+</html>
