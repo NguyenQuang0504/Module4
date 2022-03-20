@@ -11,16 +11,16 @@
         }
     </style>
     <script type="text/javascript">
-        function getInput() {
-            //function lay cac thuoc tinh cua list
-            function getBlog(list) {
-                return   ` <tr>
+        function getBlog(list) {
+            return   ` <tr>
             <td>${list.id}</td>
             <td>${list.topic}</td>
             <td>${list.category}</td>
             <td>${list.content}</td>
         </tr>`
-            }
+        }
+        function getInput() {
+            //function lay cac thuoc tinh cua list
 
             let input = $("#input-search").val(); // lay gia tri o input
             // ajax
@@ -41,6 +41,19 @@
                     document.getElementById("list-blog").innerHTML = content;
                 }
             })
+        }
+        function loadNew() {
+            $.ajax({
+                type: "GET",
+                url: "/blog/home",
+                success: function (data) {
+                   let content1;
+                    for (let i=0;i<data.length;i++){
+                        content1 += getBlog(data[i]);
+                    }
+                    document.getElementById("list-blog").innerHTML += content1;
+                }
+            });
         }
     </script>
 </head>
@@ -65,6 +78,12 @@
             <td th:text="${blog.getCategory()}"></td>
         </tr>
     </table>
+    <div>
+        <input type="button" value="Load" onclick="loadNew()" id="">
+<!--        <a th:href="@{'/blog/list'(page=${listBlog.number - 1})}" th:if="${listBlog.hasPrevious()}">Back</a>-->
+<!--        <span th:text="${listBlog.number + 1}"></span>/<span th:text="${listBlog.totalPages}"></span>-->
+<!--        <a th:href="@{'/blog/list'(page=${listBlog.number + 1})}" th:if="${listBlog.hasNext()}">Next</a>-->
+    </div>
 </div>
 </body>
 </html>
