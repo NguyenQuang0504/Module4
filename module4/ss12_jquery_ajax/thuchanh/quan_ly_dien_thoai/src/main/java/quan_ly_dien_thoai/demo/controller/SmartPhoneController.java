@@ -29,4 +29,13 @@ public class SmartPhoneController {
     public ResponseEntity<List<SmartPhone>> allPhones() {
         return new ResponseEntity<>(iSmartPhoneService.findAll(), HttpStatus.OK);
     }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<SmartPhone> deleteSmartphone(@PathVariable Integer id) {
+        SmartPhone smartphoneOptional = iSmartPhoneService.findById(id);
+        if (smartphoneOptional == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        iSmartPhoneService.remove(id);
+        return new ResponseEntity<>(smartphoneOptional, HttpStatus.NO_CONTENT);
+    }
 }

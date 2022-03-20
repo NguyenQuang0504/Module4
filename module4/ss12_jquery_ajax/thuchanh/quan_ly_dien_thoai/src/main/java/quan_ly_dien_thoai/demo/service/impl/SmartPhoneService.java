@@ -21,4 +21,14 @@ public class SmartPhoneService implements ISmartPhoneService {
     public List<SmartPhone> findAll() {
         return iSmartPhoneRepository.findAll();
     }
+
+    @Override
+    public SmartPhone findById(Integer id) {
+        return iSmartPhoneRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void remove(Integer id) {
+        iSmartPhoneRepository.deleteById(id);
+    }
 }

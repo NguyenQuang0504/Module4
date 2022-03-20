@@ -8,4 +8,8 @@ public interface ISmartPhoneService {
     SmartPhone save(SmartPhone smartPhone);
 
     List<SmartPhone> findAll();
+
+    SmartPhone findById(Integer id);
+
+    void remove(Integer id);
 }
