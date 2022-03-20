@@ -1,4 +1,4 @@
-package tich_hop_ajax_cho_ung_dung_blog.demo;
+package blog_ca_nhan.demo;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;

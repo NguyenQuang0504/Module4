@@ -5,7 +5,7 @@ plugins {
     id 'war'
 }
 
-group = 'tich_hop_ajax_cho_ung_dung_blog'
+group = 'blog_ca_nhan'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
