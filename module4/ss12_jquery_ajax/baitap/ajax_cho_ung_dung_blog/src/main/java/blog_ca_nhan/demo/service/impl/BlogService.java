@@ -24,4 +24,9 @@ public class BlogService implements IBlogService {
     public List<Blog> findByName(String input_search) {
         return iBlogRepository.findByInput(input_search);
     }
+
+    @Override
+    public List<Blog> selectLimit(Integer id) {
+        return iBlogRepository.selectLimit(id);
+    }
 }

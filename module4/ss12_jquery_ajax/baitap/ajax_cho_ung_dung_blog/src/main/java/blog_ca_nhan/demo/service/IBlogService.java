@@ -10,4 +10,6 @@ public interface IBlogService {
     Page<Blog> findAll(Pageable pageable);
 
     List<Blog> findByName(String input_search);
+
+    List<Blog> selectLimit(Integer id);
 }

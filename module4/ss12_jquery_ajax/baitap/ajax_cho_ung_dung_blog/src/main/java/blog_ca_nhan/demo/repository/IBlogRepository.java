@@ -14,4 +14,6 @@ public interface IBlogRepository extends JpaRepository<Blog, Integer> {
     @Query(value = "select * from blog where topic like %?1% ", nativeQuery = true)
     List<Blog> findByInput(String input_search);
     Page<Blog> findAll(Pageable pageable);
+    @Query(value = "select * from blog LIMIT 0, ?1", nativeQuery = true)
+    List<Blog> selectLimit(Integer id);
 }

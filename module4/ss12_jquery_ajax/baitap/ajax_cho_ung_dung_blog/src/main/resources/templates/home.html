@@ -30,6 +30,30 @@
                 url :'/blog/search',
                 success : function (data) {
                     let content = '<tr>\n' +
+                    '            <th>Id</th>\n' +
+                    '            <th>Topic</th>\n' +
+                    '            <th>Category</th>\n' +
+                    '            <th>Content</th>\n' +
+                    '        </tr>';
+                    for (let i=0;i<data.length;i++){
+                        content += getBlog(data[i]);
+                    }
+                    document.getElementById("list-blog").innerHTML = content;
+                }
+            })
+        }
+        function loadNew() {
+            let size = $("#check-size").val();
+            alert(size);
+            $.ajax({
+                type: "GET",
+                url: "/blog/load",
+                data: {Count : size},
+                success: function (data) {
+                    if (data!=null){
+                        document.getElementById("check-size").value = data.length;
+                    }
+                    let content = '<tr>\n' +
                         '            <th>Id</th>\n' +
                         '            <th>Topic</th>\n' +
                         '            <th>Category</th>\n' +
@@ -39,19 +63,6 @@
                         content += getBlog(data[i]);
                     }
                     document.getElementById("list-blog").innerHTML = content;
-                }
-            })
-        }
-        function loadNew() {
-            $.ajax({
-                type: "GET",
-                url: "/blog/home",
-                success: function (data) {
-                   let content1;
-                    for (let i=0;i<data.length;i++){
-                        content1 += getBlog(data[i]);
-                    }
-                    document.getElementById("list-blog").innerHTML += content1;
                 }
             });
         }
@@ -78,6 +89,7 @@
             <td th:text="${blog.getCategory()}"></td>
         </tr>
     </table>
+    <input type="hidden" th:value="${listBlog.size}" id="check-size">
     <div>
         <input type="button" value="Load" onclick="loadNew()" id="">
 <!--        <a th:href="@{'/blog/list'(page=${listBlog.number - 1})}" th:if="${listBlog.hasPrevious()}">Back</a>-->

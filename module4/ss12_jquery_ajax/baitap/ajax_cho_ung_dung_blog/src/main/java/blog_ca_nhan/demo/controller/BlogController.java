@@ -26,8 +26,6 @@ public class BlogController {
         }
         return new ResponseEntity<>(blogList, HttpStatus.OK);
     }
-//    @GetMapping("/get")
-//    public
     @GetMapping("/list")
     public ModelAndView getList1(@PageableDefault(size = 2) Pageable pageable){
         Page<Blog> blogPageable = iBlogService.findAll(pageable);
@@ -41,5 +39,13 @@ public class BlogController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+    @GetMapping("/load")
+    public ResponseEntity<List<Blog>> loadBlog(Integer Count){
+        List<Blog> blogList = iBlogService.selectLimit(Count+2);
+        if (blogList.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(blogList, HttpStatus.OK);
     }
 }
