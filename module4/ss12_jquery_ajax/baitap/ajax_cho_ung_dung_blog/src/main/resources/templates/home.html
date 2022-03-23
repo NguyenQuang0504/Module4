@@ -29,12 +29,12 @@
                 data : {Name: input}, // Truyen tham so Name co gia tri la input xuong cho server
                 url :'/blog/search',
                 success : function (data) {
-                    let content = '<tr>\n' +
-                    '            <th>Id</th>\n' +
-                    '            <th>Topic</th>\n' +
-                    '            <th>Category</th>\n' +
-                    '            <th>Content</th>\n' +
-                    '        </tr>';
+                    let content = "<tr>\n" +
+                        "            <th>Id</th>\n" +
+                        "            <th>Topic</th>\n" +
+                        "            <th>Category</th>\n" +
+                        "            <th>Content</th>\n" +
+                        "        </tr>";
                     for (let i=0;i<data.length;i++){
                         content += getBlog(data[i]);
                     }
