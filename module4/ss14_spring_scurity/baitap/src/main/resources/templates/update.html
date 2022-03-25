@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head" >
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<center>
+    <h1> Update Blog</h1>
+</center>
+<form th:action="@{/blog/create}" method="post" th:object="${blog}">
+    <div class="container">
+        <input type="hidden" th:field="*{id}">
+        <center>
+            <lable class="input-group-text>Content Blog">Topic</lable>
+            <div class="col-sm-10">
+                <input th:field="*{topic}" type="text" class="form-control form-control-lg" id="colFormLabelLg">
+            </div>
+        </center>
+        <div class="input-group mb-3">
+            <span class="input-group-text">Address</span>
+            <input th:field="*{address}" type="text" class="form-control" placeholder="Address" aria-label="Username">
+            <span class="input-group-text">Date</span>
+            <input th:field="*{date}" type="date" class="form-control" aria-label="Server">
+        </div>
+            <div>
+                <lable>Category</lable>
+                <select th:field="*{category}">
+                    <option th:each="category :${list}" th:text="${category.getName()}" th:value="${category.id}"></option>
+                </select>
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Content</label>
+            <textarea th:field="*{content}" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+    </div>
+    <div class="d-grid gap-2">
+        <button class="btn btn-primary" type="submit">Update</button>
+    </div>
+</form>
+</body>
+</html>

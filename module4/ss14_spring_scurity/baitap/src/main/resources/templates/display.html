@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1 th:text="${blog.getTopic()}"></h1>
+<h3><span th:text="${blog.getAddress()}"></span>
+    <span th:text="${blog.getDate()}"></span>
+</h3>
+<p th:text="${blog.getContent()}">
+</p>
+<a th:href="@{/category/home}">Display List Category</a>
+</body>
+</html>
