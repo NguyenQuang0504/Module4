@@ -33,7 +33,7 @@ public class BlogController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<Blog>> returnList(String Name ){
+    public ResponseEntity<List<Blog>> returnList(String Name){
         List<Blog> list = iBlogService.findByName(Name);
         if (list.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
