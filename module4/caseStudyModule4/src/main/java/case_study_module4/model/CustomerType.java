@@ -1,5 +1,7 @@
 package case_study_module4.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -10,7 +12,7 @@ public class CustomerType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer customer_type_id;
     private String customer_type_name;
-
+    @JsonBackReference
     @OneToMany(mappedBy = "customerType")
     private List<Customer> customers;
     public CustomerType() {

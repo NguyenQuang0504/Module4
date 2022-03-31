@@ -30,8 +30,45 @@
                     //chặn sự kiện mặc định của thẻ
                     event.preventDefault();
             })
-
         })
+        function searchCustomer() {
+            let input = $("#input-search").val();
+            $.ajax({
+                type: "GET",
+                url: `/customer/search/${input}`,
+                success: function (data) {
+                    let content = "<tr>\n" +
+                        "                            <th>Id</th>\n" +
+                        "                            <th>Name</th>\n" +
+                        "                            <th>Birth</th>\n" +
+                        "                            <th>Phone</th>\n" +
+                        "                            <th>Email</th>\n" +
+                        "                            <th>Address</th>\n" +
+                        "                            <th>CustomerType</th>\n" +
+                        "                            <th>Delete</th>\n" +
+                        "                            <th>Update</th>\n" +
+                        "                        </tr>";
+                    for (let i=0;i<data.length;i++){
+                        content += getData(data[i]);
+                    }
+                    document.getElementById("table-employee").innerHTML = content;
+                }
+            });
+            event.preventDefault();
+        }
+        function getData(customer) {
+            return `<tr>`+
+                            `<td>${customer.customer_id}</td>`+
+                            `<td>${customer.customer_name}</td>`+
+                            `<td>${customer.customer_birth}</td>`+
+                            `<td>${customer.customer_phone}</td>`+
+                            `<td>${customer.customer_email}</td>`+
+                            `<td>${customer.customer_address}</td>`+
+                            `<td>${customer.customerType.customer_type_name}</td>`+
+                            `<td><a th:href="${customer.customer_id}" class="delete-customer">Delete</a></td>`+
+                            `<td><a th:href="@{/customer/update/{id}(id=${customer.customer_id})}" >Update</a></td>`+
+                        `</tr>`;
+        }
     </script>
 </head>
 <body>
@@ -59,10 +96,10 @@
                             <a class="nav-link active" aria-current="page">Contract</a>
                         </li>
                     </ul>
-                    <form class="d-flex" th:action="@{/customer/search}" method="get">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
+                    <div class="d-flex" >
+                        <input id="input-search" class="form-control me-2" placeholder="Search" aria-label="Search" >
+                        <button onclick="searchCustomer()" class="btn btn-outline-success" >Search</button>
+                    </div>
                 </div>
             </div>
         </nav>
