@@ -1,5 +1,7 @@
 package case_study_module4.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -9,7 +11,7 @@ public class Division {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer division_id;
     private String division_name;
-
+    @JsonBackReference
     @OneToMany(mappedBy = "division")
      private List<Employee> employees;
 

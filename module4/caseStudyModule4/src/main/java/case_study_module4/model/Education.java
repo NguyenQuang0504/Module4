@@ -1,5 +1,7 @@
 package case_study_module4.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -10,7 +12,7 @@ public class Education {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer education_degree_id;
     private String education_degree_name;
-
+    @JsonBackReference
     @OneToMany(mappedBy = "education")
     private List<Employee> employees;
 

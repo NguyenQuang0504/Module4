@@ -1,79 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/style/style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript">
-        //Phuong thuc delete dung ajax
-        $(document).ready(function () {
-            //sư kiện nào thực hiện Ajax
-            $(document).on("click",".delete-employee",function (event) {
-                //lay du lieu
-                let a = $(this);
-                let employeeId = a.attr("href");
-                // goi ajax
-                $.ajax({
-                    type: "DELETE",
-                    //tên API
-                    url: `/delete/${employeeId}`,
-                    //xử lý khi thành công
-                    success: function (data) {
-                        a.parent().parent().remove();
-                    }
-
-                });
-                //chặn sự kiện mặc định của thẻ
-                event.preventDefault();
-            })
-
-        })
-
-        //Phuong thuc tim kiem dung ajax
-        function searchEmployee() {
-            let input = $("#search-input").val();
-            $.ajax({
-                type: "GET",
-                data :{Name : input},
-                url: "/employee/search",
-                success: function (data) {
-                    let content = "<tr>\n" +
-                        "                            <th>Id</th>\n" +
-                        "                            <th>Name</th>\n" +
-                        "                            <th>Birth</th>\n" +
-                        "                            <th>Phone</th>\n" +
-                        "                            <th>Email</th>\n" +
-                        "                            <th>Address</th>\n" +
-                        "                            <th>Delete</th>\n" +
-                        "                            <th>Update</th>\n" +
-                        "                        </tr>";
-                    for (let i=0;i<data.length;i++){
-                        content += getData(data[i]);
-                    }
-                    document.getElementById('table-employee').innerHTML = content;
-                }
-            });
-            event.preventDefault();
-        }
-        // phuong thuc lay data
-        function getData(employee) {
-            return `<tr>`+
-                            `<td>${employee.employee_id}</td>`+
-                           ` <td>${employee.employee_name}</td>`+
-                           `<td>${employee.employee_birthday}</td>`+
-                           ` <td>${employee.employee_phone}</td>`+
-                            `<td>${employee.employee_email}</td>`+
-                            `<td>${employee.employee_address}</td>`+
-                            `<td><a href="${employee.employee_id}" class="delete-employee">Delete</a></td>`+
-                            `<td><a href="@{/employee/update/{id}(id=${employee.employee_id})}">Update</a></td>`+
-                       `</tr>`;
-        }
-    </script>
 </head>
 <body>
 <div>
@@ -100,10 +34,10 @@
                             <a class="nav-link active" aria-current="page">Contract</a>
                         </li>
                     </ul>
-                    <div class="d-flex">
-                        <input id="search-input" class="form-control me-2" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" onclick="searchEmployee()">Search</button>
-                    </div>
+                    <form class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
                 </div>
             </div>
         </nav>
@@ -132,43 +66,61 @@
                 </div>
                 <div class="col-md-9 col-xs-12 content-right">
                     <div id="header-table">
-                        <h2 style="margin-top: 35px; margin-bottom: 10px; font-weight: 400;">List Employee</h2>
-                        <a th:href="@{/employee/create}">Create new Employee</a>
+                        <h2 style="margin-top: 35px; margin-bottom: 10px; font-weight: 400;">Update Customer</h2>
+                        <a th:href="@{/customer/home}">Display List Customer</a>
                     </div>
-                    <table class="table table-striped" id="table-employee">
-                        <tr>
-                            <th>Id</th>
-                            <th>Name</th>
-                            <th>Birth</th>
-                            <th>Phone</th>
-                            <th>Email</th>
-                            <th>Address</th>
-                            <th>Delete</th>
-                            <th>Update</th>
-                        </tr>
-                        <tr th:each="emloyee :${listEmployee}">
-                            <td th:text="${emloyee.getEmployee_id()}"></td>
-                            <td th:text="${emloyee.getEmployee_name()}"></td>
-                            <td th:text="${emloyee.getEmployee_birthday()}"></td>
-                            <td th:text="${emloyee.getEmployee_phone()}"></td>
-                            <td th:text="${emloyee.getEmployee_email()}"></td>
-                            <td th:text="${emloyee.getEmployee_address()}"></td>
-                            <td><a th:href="${emloyee.getEmployee_id()}" class="delete-employee">Delete</a></td>
-                            <td><a th:href="@{/employee/update/{id}(id=${emloyee.getEmployee_id()})}">Update</a></td>
-                        </tr>
-                    </table>
-                    <center>
-                    <div>
-                        <a th:href="@{'/employee/home'(page=${listEmployee.number - 1})}" th:if="${listEmployee.hasPrevious()}">Back</a>
-                        <span th:text="${listEmployee.number + 1}"></span>/<span th:text="${listEmployee.totalPages}"></span>
-                        <a th:href="@{'/employee/home'(page=${listEmployee.number + 1})}" th:if="${listEmployee.hasNext()}">Next</a>
+                    <div id="input-form">
+                        <form th:action="@{/customer/save}" th:object="${customer}" method="post">
+                            <input type="hidden" th:field="*{customer_id}">
+                            <div class="input-group input-group-sm mb-3">
+                                <span class="input-group-text">Name</span>
+                                <input th:field="*{customer_name}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            </div>
+                            <div class="input-group input-group-sm mb-3">
+                                <span class="input-group-text">Birthday</span>
+                                <input type="date" th:field="*{customer_birth}">
+                            </div>
+                            <div class="input-group input-group-sm mb-3">
+                                <span class="input-group-text">Email</span>
+                                <input th:field="*{customer_email}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            </div>
+                            <div class="input-group input-group-sm mb-3">
+                                <span class="input-group-text">Phone</span>
+                                <input th:field="*{customer_phone}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            </div>
+                            <div class="input-group input-group-sm mb-3">
+                                <span class="input-group-text">Address</span>
+                                <input th:field="*{customer_address}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            </div>
+                            <div class="input-group input-group-sm mb-3">
+                                <span class="input-group-text">Id Card</span>
+                                <input th:field="*{customer_id_card}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            </div>
+                            <div>
+                            <span class="input-group input-group-sm mb-3">
+                                <span class="input-group-text">Gender</span>
+                                 <select th:field="*{customer_gender}" class="form-select" aria-label="Default select example">
+                                    <option value="1">Nam</option>
+                                     <option value="0">Nữ</option>
+                                 </select>
+                            </span>
+                                <span class="input-group input-group-sm mb-3">
+                                <span class="input-group-text">Customer Type</span>
+                            <select th:field="*{customerType.customer_type_id}" class="form-select" aria-label="Default select example">
+                                <option th:each="customerType :${listCustomerType}" th:value="${customerType.getCustomer_type_id()}"><p th:text="${customerType.getCustomer_type_name()}"></p></option>
+                            </select>
+                            </span>
+                            </div>
+                            <div style="width: 100%; margin-bottom: 10px" class="d-grid gap-2">
+                                <button class="btn btn-primary" type="submit">Update</button>
+                            </div>
+                        </form>
                     </div>
-                    </center>
                 </div>
             </div>
         </div>
     </div>
-    <div class="footer">
+    <div style="margin-top: 45px" class="footer">
         <div class="icon">
             <center>
             <span>

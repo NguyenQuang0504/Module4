@@ -1,8 +1,8 @@
 package case_study_module4.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -29,7 +29,7 @@ public class Employee {
     @ManyToOne
     @JoinColumn(name = "division_id", nullable = false)
     private Division division;
-
+    @JsonBackReference
     @OneToMany(mappedBy = "employee")
     private List<Contract> contracts;
 

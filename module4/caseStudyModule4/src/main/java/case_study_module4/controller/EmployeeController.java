@@ -68,10 +68,10 @@ public class EmployeeController {
         modelMap.addAttribute("listEducation", educationList);
         return "employee/update";
     }
-    @GetMapping("/search")
-    public String search(@PageableDefault(size = 7)Pageable pageable,@RequestParam String search, ModelMap modelMap){
-        Page<Employee> listEmployee = iEmployeeService.findByName(search, pageable);
-        modelMap.addAttribute("listEmployee", listEmployee);
-        return "employee/home";
-    }
+//    @GetMapping("/search")
+//    public String search(@PageableDefault(size = 7)Pageable pageable,@RequestParam String search, ModelMap modelMap){
+//        Page<Employee> listEmployee = iEmployeeService.findByName(search, pageable);
+//        modelMap.addAttribute("listEmployee", listEmployee);
+//        return "employee/home";
+//    }
 }
