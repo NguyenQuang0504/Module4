@@ -30,7 +30,7 @@
                             <a th:href="@{/service/create}" class="nav-link active" aria-current="page">Create new Service</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page">Create new Contract</a>
+                            <a class="nav-link active" aria-current="page" th:href="@{/contract/create}">Create new Contract</a>
                         </li>
                     </ul>
                     <form class="d-flex">
@@ -56,10 +56,10 @@
                             <li><a th:href="@{/employee/home}">EMPLOYEE</a></li>
                         </ul>
                         <ul>
-                            <li><a>CONTRACT</a></li>
+                            <li><a th:href="@{/contract/home}">CONTRACT</a></li>
                         </ul>
                         <ul>
-                            <li><a th:href="@{/service/create}">Create new Service</a></li>
+                            <li><a th:href="@{/service/home}">SERVICE</a></li>
                         </ul>
                     </div>
                 </div>

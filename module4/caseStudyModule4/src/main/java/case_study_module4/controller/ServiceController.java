@@ -7,6 +7,9 @@ import case_study_module4.service.IRentTypeService;
 import case_study_module4.service.IServiceService;
 import case_study_module4.service.IServiceTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,6 +40,12 @@ public class ServiceController {
     @PostMapping("/save")
     public String saveService(@ModelAttribute Service service){
         iServiceService.save(service);
-        return "redirect:/";
+        return "redirect:/service/home";
+    }
+    @GetMapping("/home")
+    public String display(@PageableDefault(size = 7)Pageable pageable, ModelMap modelMap){
+        Page<Service> listService = iServiceService.findAll(pageable);
+        modelMap.addAttribute("listService", listService);
+        return "view_service/home";
     }
 }

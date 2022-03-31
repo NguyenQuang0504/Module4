@@ -9,8 +9,8 @@ public class Contract {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer contract_id;
-    private Date contract_start_date;
-    private Date contract_end_date;
+    private String contract_start_date;
+    private String contract_end_date;
     private Double contract_deposit;
     private Double contract_total_money;
 
@@ -29,7 +29,7 @@ public class Contract {
     @JoinColumn(name = "service_id", nullable = false)
     private Service service;
 
-    public Contract(Integer contract_id, Date contract_start_date, Date contract_end_date, Double contract_deposit, Double contract_total_money, Employee employee, Customer customer, List<ContractDetail> contractDetails, Service service) {
+    public Contract(Integer contract_id, String contract_start_date, String contract_end_date, Double contract_deposit, Double contract_total_money, Employee employee, Customer customer, List<ContractDetail> contractDetails, Service service) {
         this.contract_id = contract_id;
         this.contract_start_date = contract_start_date;
         this.contract_end_date = contract_end_date;
@@ -39,6 +39,22 @@ public class Contract {
         this.customer = customer;
         this.contractDetails = contractDetails;
         this.service = service;
+    }
+
+    public String getContract_start_date() {
+        return contract_start_date;
+    }
+
+    public void setContract_start_date(String contract_start_date) {
+        this.contract_start_date = contract_start_date;
+    }
+
+    public String getContract_end_date() {
+        return contract_end_date;
+    }
+
+    public void setContract_end_date(String contract_end_date) {
+        this.contract_end_date = contract_end_date;
     }
 
     public Service getService() {
@@ -82,22 +98,6 @@ public class Contract {
 
     public void setContract_id(Integer contract_id) {
         this.contract_id = contract_id;
-    }
-
-    public Date getContract_start_date() {
-        return contract_start_date;
-    }
-
-    public void setContract_start_date(Date contract_start_date) {
-        this.contract_start_date = contract_start_date;
-    }
-
-    public Date getContract_end_date() {
-        return contract_end_date;
-    }
-
-    public void setContract_end_date(Date contract_end_date) {
-        this.contract_end_date = contract_end_date;
     }
 
     public Double getContract_deposit() {
