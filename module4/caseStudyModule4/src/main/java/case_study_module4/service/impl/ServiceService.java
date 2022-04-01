@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ServiceService implements IServiceService {
     @Autowired
@@ -30,5 +32,10 @@ public class ServiceService implements IServiceService {
     @Override
     public void delete(Integer id) {
         iServiceRepository.deleteById(id);
+    }
+
+    @Override
+    public List<case_study_module4.model.Service> findAll1() {
+        return iServiceRepository.findAll();
     }
 }

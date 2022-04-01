@@ -10,8 +10,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -35,7 +37,10 @@ public class CustomerController {
         return "customer/create";
     }
     @PostMapping("/save")
-    public String saveCustomer(@ModelAttribute Customer customer){
+    public String saveCustomer(@Valid @ModelAttribute Customer customer, BindingResult bindingResult){
+        if (bindingResult.hasFieldErrors()){
+            return "customer/create";
+        }
         iCustomerService.save(customer);
         return "redirect:/customer/home";
     }

@@ -1,6 +1,10 @@
 package case_study_module4.model;
 
+import jdk.nashorn.internal.runtime.regexp.joni.Regex;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 @Entity
@@ -8,6 +12,7 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer customer_id;
+    @NotEmpty(message = "Ten khong duoc de trong")
     private String customer_name;
     private String customer_birth;
     private Boolean customer_gender;

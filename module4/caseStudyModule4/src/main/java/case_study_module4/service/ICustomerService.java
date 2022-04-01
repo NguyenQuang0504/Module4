@@ -16,4 +16,7 @@ public interface ICustomerService {
     void save(Customer customer);
 
     List<Customer> findByName(String search);
+    List<Customer> findAll();
+
+    Page<Customer> find(Pageable pageable);
 }

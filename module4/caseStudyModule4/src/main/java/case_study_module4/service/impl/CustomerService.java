@@ -39,4 +39,14 @@ public class CustomerService implements ICustomerService {
     public List<Customer> findByName(String search) {
         return iCustomerRepository.findByName(search);
     }
+
+    @Override
+    public List<Customer> findAll() {
+        return iCustomerRepository.findAll();
+    }
+
+    @Override
+    public Page<Customer> find(Pageable pageable) {
+        return iCustomerRepository.find(pageable);
+    }
 }

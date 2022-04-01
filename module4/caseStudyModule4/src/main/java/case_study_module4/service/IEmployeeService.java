@@ -18,4 +18,5 @@ public interface IEmployeeService {
     Optional<Employee> findById(Integer id);
 
     List<Employee> findByName(String name);
+    List<Employee> findAll();
 }

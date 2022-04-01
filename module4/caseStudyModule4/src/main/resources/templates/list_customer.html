@@ -8,68 +8,6 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/style/style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            //sư kiện nào thực hiện Ajax
-            $(document).on("click",".delete-customer",function (event) {
-                    //lay du lieu
-                    let a = $(this);
-                    let customerId = a.attr("href");
-                    // goi ajax
-                    $.ajax({
-                        type: "DELETE",
-                        //tên API
-                        url: `/customer/delete/${customerId}`,
-                        //xử lý khi thành công
-                        success: function (data) {
-                            a.parent().parent().remove();
-                        }
-
-                    });
-                    //chặn sự kiện mặc định của thẻ
-                    event.preventDefault();
-            })
-        })
-        function searchCustomer() {
-            let input = $("#input-search").val();
-            $.ajax({
-                type: "GET",
-                url: `/customer/search/${input}`,
-                success: function (data) {
-                    let content = "<tr>\n" +
-                        "                            <th>Id</th>\n" +
-                        "                            <th>Name</th>\n" +
-                        "                            <th>Birth</th>\n" +
-                        "                            <th>Phone</th>\n" +
-                        "                            <th>Email</th>\n" +
-                        "                            <th>Address</th>\n" +
-                        "                            <th>CustomerType</th>\n" +
-                        "                            <th>Delete</th>\n" +
-                        "                            <th>Update</th>\n" +
-                        "                        </tr>";
-                    for (let i=0;i<data.length;i++){
-                        content += getData(data[i]);
-                    }
-                    document.getElementById("table-employee").innerHTML = content;
-                }
-            });
-            event.preventDefault();
-        }
-        function getData(customer) {
-            return `<tr>`+
-                            `<td>${customer.customer_id}</td>`+
-                            `<td>${customer.customer_name}</td>`+
-                            `<td>${customer.customer_birth}</td>`+
-                            `<td>${customer.customer_phone}</td>`+
-                            `<td>${customer.customer_email}</td>`+
-                            `<td>${customer.customer_address}</td>`+
-                            `<td>${customer.customerType.customer_type_name}</td>`+
-                            `<td><a th:href="${customer.customer_id}" class="delete-customer">Delete</a></td>`+
-                            `<td><a th:href="@{/customer/update/{id}(id=${customer.customer_id})}" >Update</a></td>`+
-                        `</tr>`;
-        }
-    </script>
 </head>
 <body>
 <div>
@@ -90,13 +28,10 @@
                             <a class="nav-link active" aria-current="page" th:href="@{/employee/home}">Employee</a>
                         </li>
                         <li class="nav-item">
-                            <a th:href="@{/service/create}" class="nav-link active" aria-current="page">Create new Service</a>
+                            <a class="nav-link active" aria-current="page" th:href="@{/service/create}">Create New Service</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" th:href="@{/contract/create}">Create new Contract</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" th:href="@{/useService/display}">Display List Customer Use Service</a>
+                            <a class="nav-link active" aria-current="page" th:href="@{/contract/home}">Contract</a>
                         </li>
                     </ul>
                     <div class="d-flex" >
@@ -131,39 +66,34 @@
                 </div>
                 <div class="col-md-9 col-xs-12 content-right">
                     <div id="header-table">
-                        <h2 style="margin-top: 35px; margin-bottom: 10px; font-weight: 400;">List Customer</h2>
-                        <a th:href="@{/customer/create}">Create new Customer</a>
+                        <h2 style="margin-top: 35px; margin-bottom: 10px; font-weight: 400;">List Customer Use Service</h2>
                     </div>
                     <table class="table table-striped" id="table-employee">
                         <tr>
                             <th>Id</th>
                             <th>Name</th>
                             <th>Birth</th>
-                            <th>Phone</th>
-                            <th>Email</th>
-                            <th>Address</th>
                             <th>CustomerType</th>
-                            <th>Delete</th>
-                            <th>Update</th>
+                            <th>List Attach Service</th>
                         </tr>
                         <tr th:each="customer :${listCustomer}">
                             <td th:text="${customer.getCustomer_id()}"></td>
                             <td th:text="${customer.getCustomer_name()}"></td>
                             <td th:text="${customer.getCustomer_birth()}"></td>
-                            <td th:text="${customer.getCustomer_phone()}"></td>
-                            <td th:text="${customer.getCustomer_email()}"></td>
-                            <td th:text="${customer.getCustomer_address()}"></td>
                             <td th:text="${customer.getCustomerType().getCustomer_type_name()}"></td>
-                            <td><a th:href="${customer.getCustomer_id()}" class="delete-customer">Delete</a></td>
-                            <td><a th:href="@{/customer/update/{id}(id=${customer.getCustomer_id})}" >Update</a></td>
+                           <td>
+                               <div th:each="contract: ${customer.getContracts()}">
+                               <p th:each="contractDetail: ${contract.contractDetails}" th:text="${contractDetail.attach_service.getAttach_service_name()}"></p>
+                               </div>
+                           </td>
                         </tr>
                     </table>
                     <center>
-                    <div>
-                        <a th:href="@{'/employee/home'(page=${listCustomer.number - 1})}" th:if="${listCustomer.hasPrevious()}">Back</a>
-                        <span th:text="${listCustomer.number + 1}"></span>/<span th:text="${listCustomer.totalPages}"></span>
-                        <a th:href="@{'/employee/home'(page=${listCustomer.number + 1})}" th:if="${listCustomer.hasNext()}">Next</a>
-                    </div>
+                        <div>
+                            <a th:href="@{'/useService/display'(page=${listCustomer.number - 1})}" th:if="${listCustomer.hasPrevious()}">Back</a>
+                            <span th:text="${listCustomer.number + 1}"></span>/<span th:text="${listCustomer.totalPages}"></span>
+                            <a th:href="@{'/useService/display'(page=${listCustomer.number + 1})}" th:if="${listCustomer.hasNext()}">Next</a>
+                        </div>
                     </center>
                 </div>
             </div>

@@ -36,6 +36,11 @@ public class EmployeeServiceImpl implements IEmployeeService {
         return iEmployeeRepository.findByName(name);
     }
 
+    @Override
+    public List<Employee> findAll() {
+        return iEmployeeRepository.findAll();
+    }
+
 
     @Override
     public void remove(Integer id) {

@@ -75,6 +75,7 @@
                                 <span class="input-group-text">Name</span>
                                 <input th:field="*{customer_name}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                             </div>
+                            <p th:if="${#fields.hasErrors('customer_name')}" th:errors="*{customer_name}">Name Errors</p>
                             <div class="input-group input-group-sm mb-3">
                                 <span class="input-group-text">Birthday</span>
                                 <input type="date" th:field="*{customer_birth}">

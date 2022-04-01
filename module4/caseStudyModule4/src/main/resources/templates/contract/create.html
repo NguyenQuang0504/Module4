@@ -1,75 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/style/style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            //sư kiện nào thực hiện Ajax
-            $(document).on("click",".delete-customer",function (event) {
-                    //lay du lieu
-                    let a = $(this);
-                    let customerId = a.attr("href");
-                    // goi ajax
-                    $.ajax({
-                        type: "DELETE",
-                        //tên API
-                        url: `/customer/delete/${customerId}`,
-                        //xử lý khi thành công
-                        success: function (data) {
-                            a.parent().parent().remove();
-                        }
-
-                    });
-                    //chặn sự kiện mặc định của thẻ
-                    event.preventDefault();
-            })
-        })
-        function searchCustomer() {
-            let input = $("#input-search").val();
-            $.ajax({
-                type: "GET",
-                url: `/customer/search/${input}`,
-                success: function (data) {
-                    let content = "<tr>\n" +
-                        "                            <th>Id</th>\n" +
-                        "                            <th>Name</th>\n" +
-                        "                            <th>Birth</th>\n" +
-                        "                            <th>Phone</th>\n" +
-                        "                            <th>Email</th>\n" +
-                        "                            <th>Address</th>\n" +
-                        "                            <th>CustomerType</th>\n" +
-                        "                            <th>Delete</th>\n" +
-                        "                            <th>Update</th>\n" +
-                        "                        </tr>";
-                    for (let i=0;i<data.length;i++){
-                        content += getData(data[i]);
-                    }
-                    document.getElementById("table-employee").innerHTML = content;
-                }
-            });
-            event.preventDefault();
-        }
-        function getData(customer) {
-            return `<tr>`+
-                            `<td>${customer.customer_id}</td>`+
-                            `<td>${customer.customer_name}</td>`+
-                            `<td>${customer.customer_birth}</td>`+
-                            `<td>${customer.customer_phone}</td>`+
-                            `<td>${customer.customer_email}</td>`+
-                            `<td>${customer.customer_address}</td>`+
-                            `<td>${customer.customerType.customer_type_name}</td>`+
-                            `<td><a th:href="${customer.customer_id}" class="delete-customer">Delete</a></td>`+
-                            `<td><a th:href="@{/customer/update/{id}(id=${customer.customer_id})}" >Update</a></td>`+
-                        `</tr>`;
-        }
-    </script>
 </head>
 <body>
 <div>
@@ -90,19 +28,16 @@
                             <a class="nav-link active" aria-current="page" th:href="@{/employee/home}">Employee</a>
                         </li>
                         <li class="nav-item">
-                            <a th:href="@{/service/create}" class="nav-link active" aria-current="page">Create new Service</a>
+                            <a class="nav-link active" aria-current="page">Service</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" th:href="@{/contract/create}">Create new Contract</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" th:href="@{/useService/display}">Display List Customer Use Service</a>
+                            <a class="nav-link active" aria-current="page">Contract</a>
                         </li>
                     </ul>
-                    <div class="d-flex" >
-                        <input id="input-search" class="form-control me-2" placeholder="Search" aria-label="Search" >
-                        <button onclick="searchCustomer()" class="btn btn-outline-success" >Search</button>
-                    </div>
+                    <form class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
                 </div>
             </div>
         </nav>
@@ -131,40 +66,50 @@
                 </div>
                 <div class="col-md-9 col-xs-12 content-right">
                     <div id="header-table">
-                        <h2 style="margin-top: 35px; margin-bottom: 10px; font-weight: 400;">List Customer</h2>
-                        <a th:href="@{/customer/create}">Create new Customer</a>
+                        <h2 style="margin-top: 35px; margin-bottom: 10px; font-weight: 400;">Create Contract</h2>
+                        <a th:href="@{/contract/home}">Display List Contract</a>
                     </div>
-                    <table class="table table-striped" id="table-employee">
-                        <tr>
-                            <th>Id</th>
-                            <th>Name</th>
-                            <th>Birth</th>
-                            <th>Phone</th>
-                            <th>Email</th>
-                            <th>Address</th>
-                            <th>CustomerType</th>
-                            <th>Delete</th>
-                            <th>Update</th>
-                        </tr>
-                        <tr th:each="customer :${listCustomer}">
-                            <td th:text="${customer.getCustomer_id()}"></td>
-                            <td th:text="${customer.getCustomer_name()}"></td>
-                            <td th:text="${customer.getCustomer_birth()}"></td>
-                            <td th:text="${customer.getCustomer_phone()}"></td>
-                            <td th:text="${customer.getCustomer_email()}"></td>
-                            <td th:text="${customer.getCustomer_address()}"></td>
-                            <td th:text="${customer.getCustomerType().getCustomer_type_name()}"></td>
-                            <td><a th:href="${customer.getCustomer_id()}" class="delete-customer">Delete</a></td>
-                            <td><a th:href="@{/customer/update/{id}(id=${customer.getCustomer_id})}" >Update</a></td>
-                        </tr>
-                    </table>
-                    <center>
-                    <div>
-                        <a th:href="@{'/employee/home'(page=${listCustomer.number - 1})}" th:if="${listCustomer.hasPrevious()}">Back</a>
-                        <span th:text="${listCustomer.number + 1}"></span>/<span th:text="${listCustomer.totalPages}"></span>
-                        <a th:href="@{'/employee/home'(page=${listCustomer.number + 1})}" th:if="${listCustomer.hasNext()}">Next</a>
+                    <div id="input-form">
+                        <form th:action="@{/contract/save}" th:object="${contract}" method="post">
+                            <div class="input-group input-group-sm mb-3">
+                                <span class="input-group-text">Start Date</span>
+                                <input th:field="*{contract_start_date}" type="date">
+                            </div>
+                            <div class="input-group input-group-sm mb-3">
+                                <span class="input-group-text">End Date</span>
+                                <input type="date" th:field="*{contract_end_date}">
+                            </div>
+                            <div class="input-group input-group-sm mb-3">
+                                <span class="input-group-text">Deposit</span>
+                                <input th:field="*{contract_deposit}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            </div>
+                            <div class="input-group input-group-sm mb-3">
+                                <span class="input-group-text">Total Money</span>
+                                <input th:field="*{contract_total_money}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            </div>
+                            <span class="input-group input-group-sm mb-3">
+                                <span class="input-group-text">Employee</span>
+                                 <select th:field="*{employee.employee_id}" class="form-select" aria-label="Default select example">
+                                    <option th:each="employees :${employee}" th:value="${employees.employee_id}"><p th:text="${employees.getEmployee_name()}"></p></option>
+                                 </select>
+                            </span>
+                                <span class="input-group input-group-sm mb-3">
+                                <span class="input-group-text">Customer</span>
+                            <select th:field="*{customer.customer_id}" class="form-select" aria-label="Default select example">
+                                <option th:each="customerType :${customer}" th:value="${customerType.getCustomer_id()}"><p th:text="${customerType.getCustomer_name()}"></p></option>
+                            </select>
+                            </span>
+                            <span class="input-group input-group-sm mb-3">
+                                <span class="input-group-text">Service</span>
+                            <select th:field="*{service.service_id}" class="form-select" aria-label="Default select example">
+                                <option th:each="services :${service}" th:value="${services.service_id}"><p th:text="${services.getService_name()}"></p></option>
+                            </select>
+                            </span>
+                            <div style="width: 100%; margin-bottom: 10px" class="d-grid gap-2">
+                                <button class="btn btn-primary" type="submit">Create</button>
+                            </div>
+                        </form>
                     </div>
-                    </center>
                 </div>
             </div>
         </div>
