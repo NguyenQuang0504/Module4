@@ -1,19 +1,29 @@
 package case_study_module4.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
 @Entity
 public class Service {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer service_id;
+    @NotEmpty(message = "Dich vu khong duoc de trong")
     private String service_name;
+    @Pattern(regexp = "^[0-9]*$", message = "Dien tich phai lon hon 0")
     private Integer service_area;
+    @Pattern(regexp = "^[0-9]*$", message = "Cost phai lon hon khong")
     private Double service_cost;
+    @Pattern(regexp = "^[0-9]*$", message = "So luong nguoi phai lon hon 0")
     private Integer service_max_people;
     private String standard_room;
     private String description_other_convenience;
+    @NotEmpty(message = "Dien tich khong duoc de trong")
+    @Pattern(regexp = "^[0-9]*$", message = "Dien tich phai lon hon 0")
     private Double pool_area;
+    @NotEmpty(message = "Number of floors khong duoc de trong")
+    @Pattern(regexp = "^[0-9]*$", message = "Number of floors phai lon hon 0")
     private Integer number_of_floors;
 
     @ManyToOne

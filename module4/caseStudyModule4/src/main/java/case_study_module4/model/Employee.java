@@ -3,6 +3,8 @@ package case_study_module4.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import java.util.List;
 
 @Entity
@@ -10,12 +12,16 @@ public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer employee_id;
+    @NotEmpty(message = "Ten khong duoc de trong")
     private String employee_name;
     private String employee_birthday;
+    @Pattern(regexp = "^[0-9]{9}|[0-9]{12}$", message = "CMND khong dung dinh dang")
     private String employee_id_card;
     private Double employee_salary;
     private String employee_phone;
+    @Pattern(regexp = "^[\\w-\\.]+@(gmail.)+[com]{3,4}$", message = "email khong dung dinh dang")
     private String employee_email;
+    @NotEmpty(message = "Dia chi khong duoc de trong nha")
     private String employee_address;
 
     @ManyToOne
@@ -41,7 +47,11 @@ public class Employee {
         this.contracts = contracts;
     }
 
-    public Employee(Integer employee_id, String employee_name, String employee_birthday, String employee_id_card, Double employee_salary, String employee_phone, String employee_email, String employee_address, Position position, Education education, Division division, List<Contract> contracts) {
+    @ManyToOne
+    @JoinColumn(name = "User_Name", nullable = false)
+    private User user;
+
+    public Employee(Integer employee_id, @NotEmpty(message = "Ten khong duoc de trong") String employee_name, String employee_birthday, @Pattern(regexp = "^[0-9]{9}|[0-9]{12}$", message = "CMND khong dung dinh dang") String employee_id_card, Double employee_salary, String employee_phone, @Pattern(regexp = "^[\\w-\\.]+@(gmail.)+[com]{3,4}$", message = "email khong dung dinh dang") String employee_email, @NotEmpty(message = "Dia chi khong duoc de trong nha") String employee_address, Position position, Education education, Division division, List<Contract> contracts, User user) {
         this.employee_id = employee_id;
         this.employee_name = employee_name;
         this.employee_birthday = employee_birthday;
@@ -54,7 +64,17 @@ public class Employee {
         this.education = education;
         this.division = division;
         this.contracts = contracts;
+        this.user = user;
     }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
 
     public Position getPosition() {
         return position;

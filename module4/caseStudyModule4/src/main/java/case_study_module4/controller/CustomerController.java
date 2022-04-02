@@ -11,6 +11,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -37,8 +38,10 @@ public class CustomerController {
         return "customer/create";
     }
     @PostMapping("/save")
-    public String saveCustomer(@Valid @ModelAttribute Customer customer, BindingResult bindingResult){
+    public String saveCustomer(@Validated @ModelAttribute Customer customer, BindingResult bindingResult, ModelMap modelMap){
         if (bindingResult.hasFieldErrors()){
+            List<CustomerType> customerTypes = iCustomerTypeService.findAll();
+            modelMap.addAttribute("listCustomerType", customerTypes);
             return "customer/create";
         }
         iCustomerService.save(customer);

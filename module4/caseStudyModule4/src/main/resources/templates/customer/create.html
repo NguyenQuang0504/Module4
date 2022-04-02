@@ -84,6 +84,7 @@
                                 <span class="input-group-text">Email</span>
                                 <input th:field="*{customer_email}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                             </div>
+                            <p th:if="${#fields.hasErrors('customer_email')}" th:errors="*{customer_email}"> Customer Email </p>
                             <div class="input-group input-group-sm mb-3">
                                 <span class="input-group-text">Phone</span>
                                 <input th:field="*{customer_phone}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
@@ -92,10 +93,12 @@
                                 <span class="input-group-text">Address</span>
                                 <input th:field="*{customer_address}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                             </div>
+                            <p th:if="${#fields.hasErrors('customer_address')}" th:errors="*{customer_address}"> Customer Address</p>
                             <div class="input-group input-group-sm mb-3">
                                 <span class="input-group-text">Id Card</span>
                                 <input th:field="*{customer_id_card}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                             </div>
+                            <p th:if="${#fields.hasErrors('customer_id_card')}" th:errors="*{customer_id_card}">Customer Id Card</p>
                             <div>
                             <span class="input-group input-group-sm mb-3">
                                 <span class="input-group-text">Gender</span>
@@ -120,7 +123,7 @@
             </div>
         </div>
     </div>
-    <div style="margin-top: 45px" class="footer">
+    <div class="footer">
         <div class="icon">
             <center>
             <span>

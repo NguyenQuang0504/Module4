@@ -1,10 +1,12 @@
 package case_study_module4.model;
 
 import jdk.nashorn.internal.runtime.regexp.joni.Regex;
+import org.hibernate.annotations.Parent;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import java.util.List;
 
 @Entity
@@ -16,9 +18,12 @@ public class Customer {
     private String customer_name;
     private String customer_birth;
     private Boolean customer_gender;
+    @Pattern(regexp = "^[0-9]{9}|[0-9]{12}$", message = "CMND khong dung dinh dang")
     private String customer_id_card;
     private String customer_phone;
+    @Pattern(regexp = "^[\\w-\\.]+@(gmail.)+[com]{3,4}$", message = "email khong dung dinh dang")
     private String customer_email;
+    @NotEmpty(message = "Dia chi khong duoc de trong")
     private String customer_address;
 
     @ManyToOne

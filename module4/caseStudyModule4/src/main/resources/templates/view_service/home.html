@@ -58,6 +58,9 @@
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" th:href="@{/contract/home}">Contract</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" th:if="${#request.userPrincipal != null}" th:href="@{/logout}">Logout</a>
+                        </li>
                     </ul>
                     <div class="d-flex">
                         <input id="search-input" class="form-control me-2" placeholder="Search" aria-label="Search">
@@ -87,6 +90,7 @@
                         <ul>
                             <li><a th:href="@{/service/home}">SERVICE</a></li>
                         </ul>
+
                     </div>
                 </div>
                 <div class="col-md-9 col-xs-12 content-right">

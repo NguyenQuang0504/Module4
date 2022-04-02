@@ -75,6 +75,7 @@
                                 <span class="input-group-text">Name</span>
                                 <input th:field="*{employee_name}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                             </div>
+                            <p th:if="${#fields.hasErrors('employee_name')}" th:errors="*{employee_name}">Employee Name</p>
                             <div class="input-group input-group-sm mb-3">
                                 <span class="input-group-text">Birthday</span>
                                 <input type="date" th:field="*{employee_birthday}">
@@ -83,6 +84,7 @@
                                 <span class="input-group-text">Id Card</span>
                                 <input th:field="*{employee_id_card}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                             </div>
+                            <p th:if="${#fields.hasErrors('employee_id_card')}" th:errors="*{employee_id_card}">Employee Id Card</p>
                             <div class="input-group input-group-sm mb-3">
                                 <span class="input-group-text">Salary</span>
                                 <input th:field="*{employee_salary}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
@@ -95,10 +97,12 @@
                                 <span class="input-group-text">Email</span>
                                 <input th:field="*{employee_email}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                             </div>
+                            <p th:if="${#fields.hasErrors('employee_email')}" th:errors="*{employee_email}">Employee Email</p>
                             <div class="input-group input-group-sm mb-3">
                                 <span class="input-group-text">Address</span>
                                 <input th:field="*{employee_address}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                             </div>
+                            <p th:if="${#fields.hasErrors('employee_address')}" th:errors="*{employee_address}">Employee Address</p>
                             <div>
                             <span class="input-group input-group-sm mb-3">
                                 <span class="input-group-text">Position</span>
@@ -128,7 +132,7 @@
             </div>
         </div>
     </div>
-    <div style="margin-top: 150px" class="footer">
+    <div class="footer">
         <div class="icon">
             <center>
             <span>

@@ -102,6 +102,10 @@
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" th:href="@{/useService/display}">Display List Customer Use Service</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" th:if="${#request.userPrincipal != null}" th:href="@{/logout}">Logout</a>
+                        </li>
+
                     </ul>
                     <div class="d-flex">
                         <input id="search-input" class="form-control me-2" placeholder="Search" aria-label="Search">

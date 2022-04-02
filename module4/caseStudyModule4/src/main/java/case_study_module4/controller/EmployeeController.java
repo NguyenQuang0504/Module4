@@ -14,6 +14,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -52,7 +54,16 @@ public class EmployeeController {
         return "employee/create";
     }
     @PostMapping("/save")
-    public String save(@ModelAttribute Employee employee, ModelMap modelMap){
+    public String save(@Validated @ModelAttribute Employee employee, BindingResult bindingResult, ModelMap modelMap){
+        if (bindingResult.hasFieldErrors()){
+            List<Position> positionList = iPositionService.findAll();
+            List<Division> divisionList = iDivisionService.findAll();
+            List<Education> educationList = iEducationService.findAll();
+            modelMap.addAttribute("listDivision", divisionList);
+            modelMap.addAttribute("listPosition", positionList);
+            modelMap.addAttribute("listEducation", educationList);
+            return "employee/create";
+        }
         iEmployeeService.save(employee);
         return "redirect:/employee/home";
     }
@@ -68,10 +79,4 @@ public class EmployeeController {
         modelMap.addAttribute("listEducation", educationList);
         return "employee/update";
     }
-//    @GetMapping("/search")
-//    public String search(@PageableDefault(size = 7)Pageable pageable,@RequestParam String search, ModelMap modelMap){
-//        Page<Employee> listEmployee = iEmployeeService.findByName(search, pageable);
-//        modelMap.addAttribute("listEmployee", listEmployee);
-//        return "employee/home";
-//    }
 }

@@ -13,22 +13,22 @@
         $(document).ready(function () {
             //sư kiện nào thực hiện Ajax
             $(document).on("click",".delete-customer",function (event) {
-                    //lay du lieu
-                    let a = $(this);
-                    let customerId = a.attr("href");
-                    // goi ajax
-                    $.ajax({
-                        type: "DELETE",
-                        //tên API
-                        url: `/customer/delete/${customerId}`,
-                        //xử lý khi thành công
-                        success: function (data) {
-                            a.parent().parent().remove();
-                        }
+                       //lay du lieu
+                       let a = $(this);
+                       let customerId = a.attr("href");
+                       // goi ajax
+                       $.ajax({
+                           type: "DELETE",
+                           //tên API
+                           url: `/customer/delete/${customerId}`,
+                           //xử lý khi thành công
+                           success: function (data) {
+                               a.parent().parent().remove();
+                           }
 
-                    });
-                    //chặn sự kiện mặc định của thẻ
-                    event.preventDefault();
+                       });
+                       //chặn sự kiện mặc định của thẻ
+                       event.preventDefault();
             })
         })
         function searchCustomer() {
@@ -97,6 +97,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" th:href="@{/useService/display}">Display List Customer Use Service</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" th:if="${#request.userPrincipal != null}" th:href="@{/logout}">Logout</a>
                         </li>
                     </ul>
                     <div class="d-flex" >

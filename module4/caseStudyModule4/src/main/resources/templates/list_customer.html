@@ -62,6 +62,9 @@
                         <ul>
                             <li><a th:href="@{/service/home}">SERVICE</a></li>
                         </ul>
+                        <li class="nav-item">
+                            <a th:if="${#request.userPrincipal != null}" th:href="@{/logout}">Logout</a>
+                        </li>
                     </div>
                 </div>
                 <div class="col-md-9 col-xs-12 content-right">
