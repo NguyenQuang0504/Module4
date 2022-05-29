@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<center>
+    <h1>Danh sách câu hỏi</h1>
+</center>
+<form th:action="@{/search}" method="get">
+    <span>Title</span><input type="text" placeholder="search" name="search">
+    <span>Type</span>
+    <select name="type">
+        <option th:each="type :${questionType}" th:value="${type.id}"><p th:text="${type.getName()}"></p></option>
+    </select>
+    <button type="submit">Search</button>
+</form>
+<a th:href="@{/create}">Tạo câu hỏi mới</a>
+<table class="table table-hover" style="width: 100%">
+    <tr>
+        <th>STT</th>
+        <th>Tiêu đề</th>
+        <th>Loại câu hỏi</th>
+        <th>Ngày đăng</th>
+        <th>Tình trạng</th>
+        <th>Tính năng</th>
+    </tr>
+    <tr th:each="question :${listQuestion}">
+        <td th:text="${question.getId()}"></td>
+        <td th:text="${question.getTitle()}"></td>
+        <td th:text="${question.getQuestionType().getName()}"></td>
+        <td th:text="${question.getDate()}"></td>
+        <td th:text="${question.getStatus()}"></td>
+        <td>
+            <a th:href="@{/update/{id}(id=${question.getId()})}">Cập nhật</a>
+            <a th:href="@{/delete/{id}(id=${question.getId()})}">Xóa</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

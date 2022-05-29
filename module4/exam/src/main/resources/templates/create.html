@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Tạo mới câu hỏi</h1>
+<form th:action="@{/save}" method="post" th:object="${question1}">
+    <input type="hidden" th:field="*{id}">
+    <div class="input-group input-group-sm mb-3">
+        <span class="input-group-text">Tiêu đề</span>
+        <input th:field="*{title}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+    </div>
+    <p style="color: red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Nội dung</p>
+    <div class="input-group input-group-sm mb-3">
+        <span class="input-group-text">Date</span>
+        <input type="date" th:field="*{date}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+    </div>
+    <p style="color: red" th:if="${#fields.hasErrors('date')}" th:errors="*{date}">Ngày</p>
+
+    <div class="input-group input-group-sm mb-3">
+        <span class="input-group-text">Nội dung</span>
+        <textarea th:field="*{question}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"></textarea>
+    </div>
+    <p style="color: red" th:if="${#fields.hasErrors('question')}" th:errors="*{question}"></p>
+
+    <div class="input-group mb-3">
+        <label class="input-group-text" >Product Type</label>
+        <select th:field="*{questionType.id}" class="form-select">
+            <option th:each="type :${questionType}" th:value="${type.id}"><p th:text="${type.getName()}"></p></option>
+        </select>
+    </div>
+    <p style="color: red" th:if="${#fields.hasErrors('questionType')}" th:errors="*{questionType}">Type</p>
+    <input type="hidden" th:field="*{status}" value="Chưa phản hồi" >
+    <button type="submit">Create</button>
+</form>
+</body>
+</html>

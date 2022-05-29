@@ -12,6 +12,22 @@ public class Customer {
     private Integer id;
     private String firstName;
     private String lastName;
+    private String urlImage;
+
+    public Customer(Integer id, String firstName, String lastName, String urlImage) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.urlImage = urlImage;
+    }
+
+    public String getUrlImage() {
+        return urlImage;
+    }
+
+    public void setUrlImage(String urlImage) {
+        this.urlImage = urlImage;
+    }
 
     public Customer(Integer id, String firstName, String lastName) {
         this.id = id;

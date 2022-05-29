@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Create Product</h1>
+<form th:action="@{/product/save}" method="post" th:object="${product}">
+    <input type="hidden" th:field="*{id}">
+    <div class="input-group input-group-sm mb-3">
+        <span class="input-group-text">Name</span>
+        <input th:field="*{name}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+    </div>
+    <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name</p>
+    <div class="input-group input-group-sm mb-3">
+        <span class="input-group-text">Date</span>
+        <input type="date" th:field="*{date}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+    </div>
+    <div class="input-group input-group-sm mb-3">
+        <span class="input-group-text">Price</span>
+        <input th:field="*{price}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+    </div>
+    <p th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></p>
+    <div class="input-group mb-3">
+        <label class="input-group-text" >Product Type</label>
+        <select th:field="*{productType.id}" class="form-select">
+            <option th:each="productType2 :${productType1}" th:value="${productType2.id}"><p th:text="${productType2.getName()}"></p></option>
+        </select>
+    </div>
+    <button type="submit">Create</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(document).on("click",".delete",function (event) {
+            let a = $(this);
+            let  id = a.attr("href");
+            $.ajax({
+                type:"DELETE",
+                url: `/productRest/delete/${id}`,
+                success: function (data) {
+                    a.parent().parent().remove();
+                }
+            })
+            event.preventDefault();
+        })
+    })
+    function getData(data) {
+        return `<tr>`+
+        `<td>${data.id}</td>`+
+        `<td>${data.name}</td>`+
+        `<td>${data.price}</td>`+
+        `<td>${data.date}</td>`+
+        `<td>${data.productType.name}</td>`+
+        `<td><a class="delete" href="${data.id}">Delete</a></td>`+
+        `<td><a href="/product/update/${data.id}">Update</a></td>`+
+    `</tr>`
+    }
+
+
+    
+    function searchName() {
+        let name = $('.input-search').val();
+        $.ajax({
+            type: "GET",
+            url: `/productRest/search/${name}`,
+            success : function (data) {
+                let content = '<tr>\n' +
+                    '        <th>Id</th>\n' +
+                    '        <th>Name</th>\n' +
+                    '        <th>Price</th>\n' +
+                    '        <th>Date</th>\n' +
+                    '        <th>Type</th>\n' +
+                    '        <th>Delete</th>\n' +
+                    '        <th>Update</th>\n' +
+                    '    </tr>';
+                for (let i=0;i<data.length;i++){
+                    content += getData(data[i]);
+                }
+                document.getElementById("table-display").innerHTML = content;
+                document.getElementById("search-paging").innerHTML= '';
+            }
+        })
+        event.preventDefault();
+    }
+</script>
+<h1>List Product</h1>
+<a th:href="@{/product/create}">Create New Product</a>
+<div>
+    <input class="input-search" type="text" name="search">
+    <input type="button" onclick="searchName()" value="Search" placeholder="Search">
+</div>
+<table id="table-display" class="table table-hover" style="width: 100%">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Date</th>
+        <th>Type</th>
+        <th>Delete</th>
+        <th>Update</th>
+    </tr>
+    <tr th:each="product :${listProduct}">
+        <td th:text="${product.id}"></td>
+        <td th:text="${product.name}"></td>
+        <td th:text="${product.price}"></td>
+        <td th:text="${product.date}"></td>
+        <td th:text="${product.productType.name}"></td>
+        <td><a class="delete" th:href="${product.id}">Delete</a></td>
+        <td><a th:href="@{/product/update/{id}(id=${product.id})}">Update</a></td>
+    </tr>
+</table>
+<div id="search-paging">
+    <a th:href="@{'/product/display'(page=${listProduct.number - 1})}" th:if="${listProduct.hasPrevious()}">Back</a>
+    <span th:text="${listProduct.number + 1}"></span>/<span th:text="${listProduct.totalPages}"></span>
+    <a th:href="@{'/product/display'(page=${listProduct.number + 1})}" th:if="${listProduct.hasNext()}">Next</a>
+</div>
+</body>
+</html>
